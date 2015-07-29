@@ -25,5 +25,5 @@
         android:text="@string/btn_refresh"
         android:id="@+id/btn_refresh"
         android:layout_gravity="center_horizontal"
-        android:onClick="Refresh" />
+        android:onClick="onBtnRefreshClick" />
 </LinearLayout>
