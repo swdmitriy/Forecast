@@ -114,9 +114,6 @@ public class MainActivity extends Activity{
                     e.printStackTrace();
                 }
             }
-            else{
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
-            }
 
             return null;
         }
