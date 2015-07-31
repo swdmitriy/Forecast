@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/bg_port">
+    android:background="@drawable/bg_land">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,17 +14,23 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="@dimen/tempText"
-        android:textColor="@color/main_text" />
+        android:textColor="@color/main_text"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=":"
+        android:text=" "
         android:id="@+id/timeStampView"
         android:layout_gravity="center_horizontal"
         android:gravity="top"
         android:textSize="@dimen/timeStampText"
-        android:textColor="@color/main_text" />
+        android:textColor="@color/main_text"
+        android:layout_below="@+id/tempView"
+        android:layout_alignRight="@+id/tempView"
+        android:layout_alignEnd="@+id/tempView" />
 
     <Button
         android:layout_width="wrap_content"
@@ -32,5 +38,8 @@
         android:text="@string/btn_refresh"
         android:id="@+id/btn_refresh"
         android:layout_gravity="center_horizontal"
-        android:onClick="onBtnRefreshClick" />
-</LinearLayout>
+        android:onClick="onBtnRefreshClick"
+        android:layout_alignTop="@+id/tempView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
