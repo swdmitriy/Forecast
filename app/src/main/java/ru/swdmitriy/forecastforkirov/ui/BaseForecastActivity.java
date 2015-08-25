@@ -1,4 +1,4 @@
-package ru.swdmitriy.forecastforkirov.activity;
+package ru.swdmitriy.forecastforkirov.ui;
 
 import android.app.Activity;
 
