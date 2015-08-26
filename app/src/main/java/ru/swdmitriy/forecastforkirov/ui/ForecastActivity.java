@@ -13,6 +13,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import java.io.UnsupportedEncodingException;
 
 import ru.swdmitriy.forecastforkirov.R;
+import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 import ru.swdmitriy.forecastforkirov.model.Forecast;
 import ru.swdmitriy.forecastforkirov.service.ForecastRetrofitSpiceRequest;
 
@@ -24,7 +25,7 @@ public class ForecastActivity extends BaseForecastActivity{
     private TextView timeStampView;
     private ForecastRetrofitSpiceRequest forecastRequest;
     private static final String POST_PARAMS = "27199";
-    private static final String TAG = "ForecastLog";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +33,12 @@ public class ForecastActivity extends BaseForecastActivity{
         tempView = (TextView)findViewById(R.id.tempView);
         timeStampView = (TextView)findViewById(R.id.timeStampView);
         forecastRequest = new ForecastRetrofitSpiceRequest(POST_PARAMS);
-        Log.d(TAG, "MainActivity onCreate()");
+        Log.d(ForecastLogger.TAG, "MainActivity onCreate()");
     }
 
 
     public void onBtnRefreshClick(View v){
-        Log.d(TAG, "onBtnRefreshClick()");
+        Log.d(ForecastLogger.TAG, "onBtnRefreshClick()");
         refresh();
 
     }
@@ -45,12 +46,12 @@ public class ForecastActivity extends BaseForecastActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "MainActivity onStart()");
+        Log.d(ForecastLogger.TAG, "MainActivity onStart()");
         getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
     }
 
     private void refresh() {
-        Log.d(TAG, "getSpiceManager().execute");
+        Log.d(ForecastLogger.TAG, "getSpiceManager().execute");
         getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
     }
 
@@ -68,7 +69,7 @@ public class ForecastActivity extends BaseForecastActivity{
 
         @Override
         public void onRequestSuccess(Forecast forecast) {
-            Log.d(TAG, "onRequestSuccess()");
+            Log.d(ForecastLogger.TAG, "onRequestSuccess()");
             try {
                 updateForecast(forecast);
             } catch (UnsupportedEncodingException e) {
