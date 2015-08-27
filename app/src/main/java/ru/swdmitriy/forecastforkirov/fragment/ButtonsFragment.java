@@ -1,4 +1,4 @@
-package ru.swdmitriy.forecastforkirov.ui;
+package ru.swdmitriy.forecastforkirov.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import ru.swdmitriy.forecastforkirov.R;
 /**
  * Created by dmitriy on 25.08.15.
  */
-public class CurrentForecastFragment extends Fragment {
+public class ButtonsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_current, container, false);
+        return inflater.inflate(R.layout.fragment_buttons, container, false);
     }
 }
