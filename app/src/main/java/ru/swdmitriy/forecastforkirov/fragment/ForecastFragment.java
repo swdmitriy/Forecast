@@ -3,11 +3,11 @@ package ru.swdmitriy.forecastforkirov.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
@@ -17,6 +17,14 @@ import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
  */
 public class ForecastFragment extends Fragment {
     public static final String TAG = "ForecastFragmentTag";
+
+    public interface ReturnEventListener {
+        public void returnEvent();
+    }
+
+    ReturnEventListener returnEventListener;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_forecast, null);
@@ -25,10 +33,13 @@ public class ForecastFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(ForecastLogger.TAG, "ForecastFragment onViewCreated()");
+        Button button = (Button) getView().findViewById(R.id.btn_return);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                returnEventListener.returnEvent();
+            }
+        });
     }
-
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -69,6 +80,11 @@ public class ForecastFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         Log.d(ForecastLogger.TAG, "ForecastFragment onAttach()");
+        try {
+            returnEventListener = (ReturnEventListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+        }
     }
 
     @Override

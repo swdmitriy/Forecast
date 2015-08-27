@@ -9,12 +9,13 @@ import android.view.View;
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.fragment.CurrentFragment;
 import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment;
+import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment.ReturnEventListener;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 
 /**
  * Created by dmitriy on 28.07.15.
  */
-public class ForecastActivity extends Activity {
+public class ForecastActivity extends Activity implements ReturnEventListener{
 
     private CurrentFragment currentFragment;
     private ForecastFragment forecastFragment;
@@ -74,4 +75,18 @@ public class ForecastActivity extends Activity {
     }
 
 
+    @Override
+    public void returnEvent() {
+        transaction = manager.beginTransaction();
+        Log.d(ForecastLogger.TAG, "Go to CurrentFragment");
+        if (manager.findFragmentByTag(CurrentFragment.TAG)==null){
+            if (manager.findFragmentByTag(ForecastFragment.TAG)!=null){
+                transaction.replace(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+            } else{
+                transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+            }
+
+        }
+        transaction.commit();
+    }
 }
