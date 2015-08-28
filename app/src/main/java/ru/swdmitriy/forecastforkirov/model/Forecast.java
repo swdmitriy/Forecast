@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("serial")
 public class Forecast {
+    public final static String NAME = "current_forecast";
+    public final static String SAVED_TEMP = "temperature";
+    public final static String SAVED_TIME = "time";
+
     @SerializedName("t_air")
     private ForecastValue temperature;
     private ForecastValue humidity;

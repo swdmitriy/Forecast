@@ -2,6 +2,8 @@ package ru.swdmitriy.forecastforkirov.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.SpiceService;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -34,6 +35,7 @@ public class CurrentFragment extends Fragment {
     private TextView timeStampView;
     private ForecastRetrofitSpiceRequest forecastRequest;
     private static final String POST_PARAMS = "27199";
+    private SharedPreferences sPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class CurrentFragment extends Fragment {
         tempView = (TextView)getView().findViewById(R.id.tempView);
         timeStampView = (TextView)getView().findViewById(R.id.timeStampView);
         forecastRequest = new ForecastRetrofitSpiceRequest(POST_PARAMS);
-
+        loadCurrentForecast();
         CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
         getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
     }
@@ -83,6 +85,7 @@ public class CurrentFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        saveCurrentForecast();
         Log.d(ForecastLogger.TAG, "CurrentFragment onDestroyView()");
     }
 
@@ -115,9 +118,23 @@ public class CurrentFragment extends Fragment {
         return spiceManager;
     }
 
-    private void updateForecast(Forecast forecast) throws UnsupportedEncodingException {
+    private void updateCurrentForecast(Forecast forecast) throws UnsupportedEncodingException {
         tempView.setText(forecast.getTemperature().getValue() +" °C");
         timeStampView.setText(new String(forecast.getTemperature().getTime().split(" ")[0].getBytes("UTF-8"), "UTF-8") + " " + forecast.getTemperature().getTime().split(" ")[1]);
+    }
+
+    private void saveCurrentForecast(){
+        sPreferences = getActivity().getSharedPreferences(Forecast.NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPreferences.edit();
+        editor.putString(Forecast.SAVED_TEMP, tempView.getText().toString());
+        editor.putString(Forecast.SAVED_TIME, timeStampView.getText().toString());
+        editor.commit();
+        Log.d(ForecastLogger.TAG, "Saved forecast to SharedPref");
+    }
+    private void loadCurrentForecast(){
+        sPreferences = getActivity().getSharedPreferences(Forecast.NAME, Context.MODE_PRIVATE);
+        tempView.setText(sPreferences.getString(Forecast.SAVED_TEMP, "-"));
+        timeStampView.setText(sPreferences.getString(Forecast.SAVED_TIME, ":"));
     }
     private class ForecastRequestListener implements RequestListener<Forecast> {
 
@@ -130,7 +147,7 @@ public class CurrentFragment extends Fragment {
         public void onRequestSuccess(Forecast forecast) {
             Log.d(ForecastLogger.TAG, "onRequestSuccess()");
             try {
-                updateForecast(forecast);
+                updateCurrentForecast(forecast);
                 CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
