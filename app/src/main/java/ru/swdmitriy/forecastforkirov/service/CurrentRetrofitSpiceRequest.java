@@ -10,11 +10,11 @@ import ru.swdmitriy.forecastforkirov.model.Forecast;
 /**
  * Created by dmitriy on 20.08.15.
  */
-public class ForecastRetrofitSpiceRequest extends RetrofitSpiceRequest<Forecast, PogodaKirov> {
+public class CurrentRetrofitSpiceRequest extends RetrofitSpiceRequest<Forecast, PogodaKirov> {
 
 
     private String city;
-    public ForecastRetrofitSpiceRequest(String city) {
+    public CurrentRetrofitSpiceRequest(String city) {
         super(Forecast.class, PogodaKirov.class);
         Log.d(ForecastLogger.TAG, "ForecastRetrofitSpiceRequest()");
         this.city = city;

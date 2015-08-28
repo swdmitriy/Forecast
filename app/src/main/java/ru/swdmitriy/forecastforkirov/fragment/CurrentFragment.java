@@ -22,18 +22,18 @@ import java.io.UnsupportedEncodingException;
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 import ru.swdmitriy.forecastforkirov.model.Forecast;
-import ru.swdmitriy.forecastforkirov.service.ForecastRetrofitSpiceRequest;
-import ru.swdmitriy.forecastforkirov.service.ForecastService;
+import ru.swdmitriy.forecastforkirov.service.CurrentRetrofitSpiceRequest;
+import ru.swdmitriy.forecastforkirov.service.CurrentService;
 
 /**
  * Created by dmitriy on 25.08.15.
  */
 public class CurrentFragment extends Fragment {
     public static final String TAG = "CurrentFragmentTag";
-    private SpiceManager spiceManager = new SpiceManager(ForecastService.class);
+    private SpiceManager spiceManager = new SpiceManager(CurrentService.class);
     private TextView tempView;
     private TextView timeStampView;
-    private ForecastRetrofitSpiceRequest forecastRequest;
+    private CurrentRetrofitSpiceRequest forecastRequest;
     private static final String POST_PARAMS = "27199";
     private SharedPreferences sPreferences;
 
@@ -49,7 +49,7 @@ public class CurrentFragment extends Fragment {
         Log.d(ForecastLogger.TAG, "CurrentFragment onViewCreated()");
         tempView = (TextView)getView().findViewById(R.id.tempView);
         timeStampView = (TextView)getView().findViewById(R.id.timeStampView);
-        forecastRequest = new ForecastRetrofitSpiceRequest(POST_PARAMS);
+        forecastRequest = new CurrentRetrofitSpiceRequest(POST_PARAMS);
         loadCurrentForecast();
         CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
         getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());

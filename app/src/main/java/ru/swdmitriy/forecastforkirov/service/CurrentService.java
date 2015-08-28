@@ -9,7 +9,7 @@ import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 /**
  * Created by dmitriy on 19.08.15.
  */
-public class ForecastService extends RetrofitGsonSpiceService {
+public class CurrentService extends RetrofitGsonSpiceService {
 
     private final static String BASE_URL = "http://pogoda.kirov.ru";
 

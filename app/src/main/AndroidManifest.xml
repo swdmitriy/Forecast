@@ -13,7 +13,7 @@
         </activity>
 
         <service
-            android:name=".service.ForecastService"
+            android:name=".service.CurrentService"
             android:exported="false" />
     </application>
 
