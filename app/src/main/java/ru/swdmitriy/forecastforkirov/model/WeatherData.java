@@ -13,7 +13,7 @@ import java.util.List;
  * Created by dmitriy on 28.08.15.
  */
 @Root(name = "weatherdata")
-public class Weatherdata {
+public class WeatherData {
 
     @Element
     private Product product;
