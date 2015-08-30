@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.model.Time;
@@ -68,13 +69,13 @@ public class ForecastAdapter extends BaseAdapter {
             e.printStackTrace();
         }
         formatter = new SimpleDateFormat("dd.MM");
-        String dateString = formatter.format(dateFrom);
+        String dateString = formatter.format(offsetTimeZone(dateFrom,"UTC", "Europe/Minsk"));
 
         formatter = new SimpleDateFormat("HH");
         StringBuilder timeString = new StringBuilder();
-        timeString.append(formatter.format(dateFrom));
+        timeString.append(formatter.format(offsetTimeZone(dateFrom,"UTC", "Europe/Minsk")));
         timeString.append(" - ");
-        timeString.append(formatter.format(dateTo));
+        timeString.append(formatter.format(offsetTimeZone(dateTo,"UTC", "Europe/Minsk")));
 
         ((TextView) view.findViewById(R.id.itemFrom)).setText(dateString);
         ((TextView) view.findViewById(R.id.itemTo)).setText(timeString.toString());
@@ -84,6 +85,39 @@ public class ForecastAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.itemPrecipitation)).setText(new String().valueOf((time.getPrecipitation()!=null?time.getPrecipitation():"-")));
 
         return view;
+    }
+
+    private static Date offsetTimeZone(Date date, String fromTZ, String toTZ){
+
+        // Construct FROM and TO TimeZone instances
+        TimeZone fromTimeZone = TimeZone.getTimeZone(fromTZ);
+        TimeZone toTimeZone = TimeZone.getTimeZone(toTZ);
+
+        // Get a Calendar instance using the default time zone and locale.
+        Calendar calendar = Calendar.getInstance();
+
+        // Set the calendar's time with the given date
+        calendar.setTimeZone(fromTimeZone);
+        calendar.setTime(date);
+
+
+
+            // FROM TimeZone to UTC
+        calendar.add(Calendar.MILLISECOND, fromTimeZone.getRawOffset() * -1);
+
+        if (fromTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, calendar.getTimeZone().getDSTSavings() * -1);
+        }
+
+        // UTC to TO TimeZone
+        calendar.add(Calendar.MILLISECOND, toTimeZone.getRawOffset());
+
+        if (toTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, toTimeZone.getDSTSavings());
+        }
+
+        return calendar.getTime();
+
     }
 
     Time getProduct(int position) {
