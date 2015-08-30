@@ -63,6 +63,54 @@ public class Time{
         this.from = from;
     }
 
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Double getMinTemperature() {
+        return minTemperature;
+    }
+
+    public void setMinTemperature(Double minTemperature) {
+        this.minTemperature = minTemperature;
+    }
+
+    public Double getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    public void setMaxTemperature(Double maxTemperature) {
+        this.maxTemperature = maxTemperature;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public Double getPrecipitation() {
+        return precipitation;
+    }
+
+    public void setPrecipitation(Double precipitation) {
+        this.precipitation = precipitation;
+    }
+
+    public int getPhenomenon() {
+        return phenomenon;
+    }
+
+    public void setPhenomenon(int phenomenon) {
+        this.phenomenon = phenomenon;
+    }
+
     public Time() {
     }
 }

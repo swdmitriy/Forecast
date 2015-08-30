@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.octo.android.robospice.SpiceManager;
@@ -15,8 +17,12 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import java.util.ArrayList;
+
 import ru.swdmitriy.forecastforkirov.R;
+import ru.swdmitriy.forecastforkirov.adapter.ForecastAdapter;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
+import ru.swdmitriy.forecastforkirov.model.Time;
 import ru.swdmitriy.forecastforkirov.model.WeatherData;
 import ru.swdmitriy.forecastforkirov.service.WeatherDataSpiceService;
 import ru.swdmitriy.forecastforkirov.service.WeatherDataXmlRequest;
@@ -30,6 +36,8 @@ public class ForecastFragment extends Fragment {
     private WeatherDataXmlRequest forecastRequest;
     private static final String lat = "58.6034";
     private static final String lon = "49.6672";
+
+    private ListView forecastListView;
 
     public interface ReturnEventListener {
         public void returnEvent();
@@ -46,6 +54,7 @@ public class ForecastFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(ForecastLogger.TAG, "ForecastFragment onViewCreated()");
+        forecastListView = (ListView)getView().findViewById(R.id.forecastListView);
         Button button = (Button) getView().findViewById(R.id.btn_return);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -59,6 +68,8 @@ public class ForecastFragment extends Fragment {
 
     public final class ForecastRequestListener implements RequestListener< WeatherData > {
 
+        private ForecastAdapter forecastAdapter;
+
         @Override
         public void onRequestFailure( SpiceException spiceException ) {
             Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
@@ -69,6 +80,18 @@ public class ForecastFragment extends Fragment {
             Toast.makeText( getActivity(), "success", Toast.LENGTH_SHORT ).show();
             /*Log.d(ForecastLogger.TAG, weatherData.getSize());*/
             Log.d(ForecastLogger.TAG, weatherData.getTimes().iterator().next().getFrom());
+            ArrayList<Time> times = new ArrayList<Time>(weatherData.getTimes());
+            forecastAdapter = new ForecastAdapter(getActivity(), times);
+            forecastListView.setAdapter(forecastAdapter);
+
+//            ArrayAdapter<WeatherData> adapter = new ArrayAdapter<WeatherData>(this,
+//                    android.R.layout.simple_list_item_1, names);
+
+            // присваиваем адаптер списку
+//            forecastListView.setAdapter(adapter);
+
+
+
         }
     }
 
