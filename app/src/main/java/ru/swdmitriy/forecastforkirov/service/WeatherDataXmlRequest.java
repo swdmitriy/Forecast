@@ -18,7 +18,7 @@ public class WeatherDataXmlRequest extends SpringAndroidSpiceRequest<WeatherData
 
     public WeatherDataXmlRequest(String lat, String lon) {
         super(WeatherData.class);
-        this.baseUrl = String.format( "http://api.yr.no/weatherapi/locationforecastlts/1.2/?lat=%s;lon=%s", lat, lon);
+        this.baseUrl = String.format( "http://api.yr.no/weatherapi/locationforecastlts/1.2/?lat=%s&lon=%s", lat, lon);
     }
 
     @Override

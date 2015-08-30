@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 import ru.swdmitriy.forecastforkirov.model.Forecast;
+import ru.swdmitriy.forecastforkirov.model.WeatherData;
 import ru.swdmitriy.forecastforkirov.service.CurrentRetrofitSpiceRequest;
 import ru.swdmitriy.forecastforkirov.service.CurrentService;
 
@@ -53,8 +54,8 @@ public class CurrentFragment extends Fragment {
         loadCurrentForecast();
         CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
         getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
-    }
 
+    }
 
 
     @Override

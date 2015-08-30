@@ -6,6 +6,9 @@ import com.octo.android.robospice.SpringAndroidSpiceService;
 import com.octo.android.robospice.XmlSpringAndroidSpiceService;
 import com.octo.android.robospice.persistence.CacheManager;
 import com.octo.android.robospice.persistence.exception.CacheCreationException;
+import com.octo.android.robospice.persistence.memory.LruCacheStringObjectPersister;
+import com.octo.android.robospice.persistence.ormlite.InDatabaseObjectPersisterFactory;
+import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -14,7 +17,12 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import ru.swdmitriy.forecastforkirov.model.Product;
+import ru.swdmitriy.forecastforkirov.model.Time;
+import ru.swdmitriy.forecastforkirov.model.WeatherData;
 
 /**
  * Created by dmitriy on 30.08.15.
@@ -46,6 +54,13 @@ public class WeatherDataSpiceService extends SpringAndroidSpiceService {
 
     @Override
     public CacheManager createCacheManager(Application application) throws CacheCreationException {
-        return null;
+        CacheManager cacheManager = new CacheManager();
+        List< Class< ? >> classCollection = new ArrayList< Class< ? >>();
+        classCollection.add(WeatherData.class);
+        classCollection.add(Time.class);
+        RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper( application, "forecast_database.db", 1 );
+        InDatabaseObjectPersisterFactory inDatabaseObjectPersisterFactory = new InDatabaseObjectPersisterFactory( application, databaseHelper, classCollection );
+        cacheManager.addPersister(inDatabaseObjectPersisterFactory);
+        return cacheManager;
     }
 }

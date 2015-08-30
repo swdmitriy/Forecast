@@ -15,6 +15,9 @@
         <service
             android:name=".service.CurrentService"
             android:exported="false" />
+        <service
+            android:name=".service.WeatherDataSpiceService"
+            android:exported="false" />
     </application>
 
 </manifest>

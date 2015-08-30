@@ -8,15 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.persistence.DurationInMillis;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 import ru.swdmitriy.forecastforkirov.R;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
+import ru.swdmitriy.forecastforkirov.model.WeatherData;
+import ru.swdmitriy.forecastforkirov.service.WeatherDataSpiceService;
+import ru.swdmitriy.forecastforkirov.service.WeatherDataXmlRequest;
 
 /**
  * Created by dmitriy on 25.08.15.
  */
 public class ForecastFragment extends Fragment {
     public static final String TAG = "ForecastFragmentTag";
+    private SpiceManager spiceManager = new SpiceManager(WeatherDataSpiceService.class );
+    private WeatherDataXmlRequest forecastRequest;
+    private static final String lat = "58.6034";
+    private static final String lon = "49.6672";
 
     public interface ReturnEventListener {
         public void returnEvent();
@@ -39,9 +52,29 @@ public class ForecastFragment extends Fragment {
                 returnEventListener.returnEvent();
             }
         });
+        forecastRequest = new WeatherDataXmlRequest(lat, lon);
+        getSpiceManager().execute( forecastRequest, new Integer( 0 ), DurationInMillis.ONE_MINUTE, new ForecastRequestListener() );
     }
+
+
+    public final class ForecastRequestListener implements RequestListener< WeatherData > {
+
+        @Override
+        public void onRequestFailure( SpiceException spiceException ) {
+            Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRequestSuccess( final WeatherData weatherData ) {
+            Toast.makeText( getActivity(), "success", Toast.LENGTH_SHORT ).show();
+            /*Log.d(ForecastLogger.TAG, weatherData.getSize());*/
+            Log.d(ForecastLogger.TAG, weatherData.getTimes().iterator().next().getFrom());
+        }
+    }
+
     @Override
     public void onStart() {
+        spiceManager.start(getActivity());
         super.onStart();
         Log.d(ForecastLogger.TAG, "ForecastFragment onStart()");
     }
@@ -89,6 +122,7 @@ public class ForecastFragment extends Fragment {
 
     @Override
     public void onStop() {
+        spiceManager.shouldStop();
         super.onStop();
         Log.d(ForecastLogger.TAG, "ForecastFragment onStop()");
     }
@@ -97,5 +131,9 @@ public class ForecastFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(ForecastLogger.TAG, "ForecastFragment onCreate");
+    }
+
+    private SpiceManager getSpiceManager() {
+        return spiceManager;
     }
 }
