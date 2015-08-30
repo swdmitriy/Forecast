@@ -47,6 +47,10 @@ public class WeatherData {
             @Attribute(name = "number")
             private int phenomenon;
 
+            @Path("location/precipitation")
+            @Attribute(name = "value")
+            private int precipitation;
+
         }
 
     }
