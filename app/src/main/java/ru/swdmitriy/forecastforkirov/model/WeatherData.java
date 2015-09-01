@@ -28,10 +28,9 @@ public class WeatherData {
     public void setTimes(Collection<Time> times) {
         this.times = times;
     }
-
+    @Path("forecast/tabular")
     @ForeignCollectionField(eager = true)
-    @Path("product")
-    @ElementList(inline = true)
+    @ElementList(name="time", inline = true)
     private Collection<Time> times;
 
    /* public String getSize() {

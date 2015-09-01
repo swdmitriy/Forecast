@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2a6a7a">
 
 
     <TextView
@@ -49,11 +50,11 @@
         android:text="°C"
         android:id="@+id/itemTempUnit"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/itemMinTemp"
-        android:layout_toEndOf="@+id/itemMinTemp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:textColor="@color/main_text" />
+        android:textColor="@color/main_text"
+        android:layout_toRightOf="@+id/itemTemp"
+        android:layout_toEndOf="@+id/itemTemp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,29 +69,4 @@
         android:layout_marginStart="20dp"
         android:textColor="@color/main_text" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="9"
-        android:id="@+id/itemMinTemp"
-        android:layout_above="@+id/itemTo"
-        android:layout_toRightOf="@+id/itemTemp"
-        android:layout_toEndOf="@+id/itemTemp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/main_text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="11"
-        android:id="@+id/itemMaxTemp"
-        android:layout_below="@+id/itemMinTemp"
-        android:layout_toRightOf="@+id/itemTemp"
-        android:layout_toEndOf="@+id/itemTemp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/main_text" />
 </RelativeLayout>

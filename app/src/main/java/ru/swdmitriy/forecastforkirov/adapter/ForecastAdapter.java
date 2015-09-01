@@ -80,8 +80,6 @@ public class ForecastAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.itemFrom)).setText(dateString);
         ((TextView) view.findViewById(R.id.itemTo)).setText(timeString.toString());
         ((TextView) view.findViewById(R.id.itemTemp)).setText(new String().valueOf((time.getTemperature()!=null?time.getTemperature() : "-")));
-        ((TextView) view.findViewById(R.id.itemMinTemp)).setText(new String().valueOf((time.getMinTemperature()!=null?time.getMinTemperature():"-")));
-        ((TextView) view.findViewById(R.id.itemMaxTemp)).setText(new String().valueOf((time.getMaxTemperature()!=null?time.getMaxTemperature():"-")));
         ((TextView) view.findViewById(R.id.itemPrecipitation)).setText(new String().valueOf((time.getPrecipitation()!=null?time.getPrecipitation():"-")));
 
         return view;

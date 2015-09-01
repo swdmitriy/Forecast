@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by dmitriy on 30.08.15.
  */
-@Root(name = "time", strict=false)
+@Root(name = "forecast", strict=false)
 @DatabaseTable(tableName = "time")
 public class Time{
     @DatabaseField(generatedId = true)
@@ -21,34 +21,28 @@ public class Time{
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "weather_id")
     private WeatherData weatherData;
 
+
     @Attribute
     @DatabaseField
     private String from;
+
     @Attribute
     @DatabaseField
     private String to;
 
-    @Path("location/minTemperature")
-    @Attribute(name = "value")
-    @DatabaseField
-    private Double minTemperature;
 
-    @Path("location/maxTemperature")
-    @Attribute(name = "value")
-    @DatabaseField
-    private Double maxTemperature;
 
-    @Path("location/temperature")
+    @Path("temperature")
     @Attribute(name = "value")
     @DatabaseField
     private Double temperature;
 
-    @Path("location/symbol")
+    @Path("symbol")
     @Attribute(name = "number")
     @DatabaseField
     private int phenomenon;
 
-    @Path("location/precipitation")
+    @Path("precipitation")
     @DatabaseField
     @Attribute(name = "value")
     private Double precipitation;
@@ -71,21 +65,7 @@ public class Time{
         this.to = to;
     }
 
-    public Double getMinTemperature() {
-        return minTemperature;
-    }
 
-    public void setMinTemperature(Double minTemperature) {
-        this.minTemperature = minTemperature;
-    }
-
-    public Double getMaxTemperature() {
-        return maxTemperature;
-    }
-
-    public void setMaxTemperature(Double maxTemperature) {
-        this.maxTemperature = maxTemperature;
-    }
 
     public Double getTemperature() {
         return temperature;
