@@ -58,7 +58,7 @@ public class ForecastAdapter extends BaseAdapter {
         Time time = getProduct(position);
         String from = time.getFrom();
         String to = time.getTo();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Date dateFrom = new Date();
         Date dateTo = new Date();
         try {
@@ -69,13 +69,13 @@ public class ForecastAdapter extends BaseAdapter {
             e.printStackTrace();
         }
         formatter = new SimpleDateFormat("dd.MM");
-        String dateString = formatter.format(offsetTimeZone(dateFrom,"UTC", "Europe/Minsk"));
+        String dateString = formatter.format(dateFrom);
 
         formatter = new SimpleDateFormat("HH");
         StringBuilder timeString = new StringBuilder();
-        timeString.append(formatter.format(offsetTimeZone(dateFrom,"UTC", "Europe/Minsk")));
+        timeString.append(formatter.format(dateFrom));
         timeString.append(" - ");
-        timeString.append(formatter.format(offsetTimeZone(dateTo,"UTC", "Europe/Minsk")));
+        timeString.append(formatter.format(dateTo));
 
         ((TextView) view.findViewById(R.id.itemFrom)).setText(dateString);
         ((TextView) view.findViewById(R.id.itemTo)).setText(timeString.toString());
