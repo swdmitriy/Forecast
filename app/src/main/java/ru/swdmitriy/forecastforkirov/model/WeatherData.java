@@ -4,15 +4,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by dmitriy on 28.08.15.
@@ -21,20 +17,20 @@ import java.util.List;
 @Root(name = "weatherdata", strict=false)
 public class WeatherData {
 
-    public Collection<Time> getTimes() {
-        return times;
+    public Collection<Time> getTime() {
+        return time;
     }
 
-    public void setTimes(Collection<Time> times) {
-        this.times = times;
+    public void setTime(Collection<Time> time) {
+        this.time = time;
     }
     @Path("forecast/tabular")
     @ForeignCollectionField(eager = true)
-    @ElementList(name="time", inline = true)
-    private Collection<Time> times;
+    @ElementList(inline = true, required=false)
+    private Collection<Time> time;
 
    /* public String getSize() {
-        return String.valueOf(times.size());
+        return String.valueOf(time.size());
     }*/
 
     @DatabaseField(generatedId = true)

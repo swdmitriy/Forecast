@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by dmitriy on 30.08.15.
  */
-@Root(name = "forecast", strict=false)
+@Root(name = "time", strict=false)
 @DatabaseTable(tableName = "time")
 public class Time{
     @DatabaseField(generatedId = true)

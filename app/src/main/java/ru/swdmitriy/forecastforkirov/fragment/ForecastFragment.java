@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,6 +36,12 @@ public class ForecastFragment extends Fragment {
     private static final String lat = "58.6034";
     private static final String lon = "49.6672";
 
+    private static final String country = "Russland";
+    private static final String region = "Kirov";
+    private static final String city = "Kirov";
+
+
+
     private ListView forecastListView;
 
     public interface ReturnEventListener {
@@ -61,7 +66,7 @@ public class ForecastFragment extends Fragment {
                 returnEventListener.returnEvent();
             }
         });
-        forecastRequest = new WeatherDataXmlRequest(lat, lon);
+        forecastRequest = new WeatherDataXmlRequest(country, region, city);
         getSpiceManager().execute( forecastRequest, new Integer( 0 ), DurationInMillis.ONE_MINUTE, new ForecastRequestListener() );
     }
 
@@ -79,8 +84,8 @@ public class ForecastFragment extends Fragment {
         public void onRequestSuccess( final WeatherData weatherData ) {
             Toast.makeText( getActivity(), "success", Toast.LENGTH_SHORT ).show();
             /*Log.d(ForecastLogger.TAG, weatherData.getSize());*/
-            Log.d(ForecastLogger.TAG, weatherData.getTimes().iterator().next().getFrom());
-            ArrayList<Time> times = new ArrayList<Time>(weatherData.getTimes());
+//            Log.d(ForecastLogger.TAG, weatherData.getTime().iterator().next().getFrom());
+            ArrayList<Time> times = new ArrayList<Time>(weatherData.getTime());
             forecastAdapter = new ForecastAdapter(getActivity(), times);
             forecastListView.setAdapter(forecastAdapter);
 
