@@ -37,8 +37,8 @@
         android:text="10"
         android:id="@+id/itemTemp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/itemTo"
-        android:layout_toEndOf="@+id/itemTo"
+        android:layout_toRightOf="@+id/symbolView"
+        android:layout_toEndOf="@+id/symbolView"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:textColor="@color/main_text" />
@@ -62,11 +62,11 @@
         android:text="2"
         android:id="@+id/itemPrecipitation"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/itemTo"
-        android:layout_toEndOf="@+id/itemTo"
-        android:layout_marginLeft="130dp"
-        android:layout_marginStart="130dp"
-        android:textColor="@color/main_text" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/main_text"
+        android:layout_toRightOf="@+id/itemTempUnit"
+        android:layout_toEndOf="@+id/itemTempUnit" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,5 +79,16 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:textColor="@color/main_text" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/symbolView"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/itemTo"
+        android:layout_toEndOf="@+id/itemTo"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:focusableInTouchMode="true" />
 
 </RelativeLayout>

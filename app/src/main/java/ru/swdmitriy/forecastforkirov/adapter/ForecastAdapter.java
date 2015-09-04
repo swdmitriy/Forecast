@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -79,8 +80,10 @@ public class ForecastAdapter extends BaseAdapter {
 
         ((TextView) view.findViewById(R.id.itemFrom)).setText(dateString);
         ((TextView) view.findViewById(R.id.itemTo)).setText(timeString.toString());
-        ((TextView) view.findViewById(R.id.itemTemp)).setText(new String().valueOf((time.getTemperature()!=null?time.getTemperature() : "-")));
+        ((TextView) view.findViewById(R.id.itemTemp)).setText(new String().valueOf((time.getTemperature() != null ? time.getTemperature() : "-")));
         ((TextView) view.findViewById(R.id.itemPrecipitation)).setText(new String().valueOf((time.getPrecipitation()!=null?time.getPrecipitation():"-")));
+        ImageView imgView = (ImageView) view.findViewById(R.id.symbolView);
+        imgView.setImageResource(ctx.getResources().getIdentifier("day"+time.getPhenomenon(), "drawable", ctx.getPackageName()));
 
         return view;
     }
