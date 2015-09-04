@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="bottom"
     android:background="@drawable/bg_land">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="-"
-        android:id="@+id/tempView"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textSize="@dimen/tempText"
-        android:textColor="@color/main_text"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/forecast_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" "
-        android:id="@+id/timeStampView"
         android:layout_gravity="center_horizontal"
-        android:gravity="top"
-        android:textSize="@dimen/timeStampText"
-        android:textColor="@color/main_text"
-        android:layout_below="@+id/tempView"
-        android:layout_alignRight="@+id/tempView"
-        android:layout_alignEnd="@+id/tempView" />
+        android:layout_above="@+id/buttons_fragment">
 
-    <Button
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <fragment
+        android:name="ru.swdmitriy.forecastforkirov.fragment.ButtonsFragment"
+        android:id="@+id/buttons_fragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_refresh"
-        android:id="@+id/btn_refresh"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onBtnClick"
-        android:layout_alignTop="@+id/tempView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+
+        tools:layout="@layout/fragment_buttons"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp" />
+
 </RelativeLayout>

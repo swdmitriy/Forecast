@@ -32,7 +32,10 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
         currentFragment = new CurrentFragment();
         forecastFragment = new ForecastFragment();
         transaction = manager.beginTransaction();
-        transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+        if (manager.findFragmentByTag(CurrentFragment.TAG)==null){
+
+                transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+        }
         transaction.commit();
 
     }
