@@ -32,10 +32,10 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
         currentFragment = new CurrentFragment();
         forecastFragment = new ForecastFragment();
         transaction = manager.beginTransaction();
-        if (manager.findFragmentByTag(CurrentFragment.TAG)==null){
-            transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
-            Log.d(ForecastLogger.TAG, "add CurrentFragment");
-        }
+        if (savedInstanceState==null&&manager.findFragmentByTag(CurrentFragment.TAG)==null){
+                Log.d(ForecastLogger.TAG, "1st add CurrentFragment");
+                transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+            }
         transaction.commit();
 
     }
@@ -64,7 +64,7 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
                 if (manager.findFragmentByTag(ForecastFragment.TAG) == null) {
                     if (manager.findFragmentByTag(CurrentFragment.TAG)!=null){
                         transaction.replace(R.id.forecast_container, forecastFragment, ForecastFragment.TAG);
-                        Log.d(ForecastLogger.TAG, "add with ForecastFragment");
+                        Log.d(ForecastLogger.TAG, "replace with ForecastFragment");
                     } else{
                         transaction.add(R.id.forecast_container, forecastFragment, ForecastFragment.TAG);
                         Log.d(ForecastLogger.TAG, "add ForecastFragment");
@@ -95,5 +95,48 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
 
         }
         transaction.commit();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(ForecastLogger.TAG, "MainActivity onRestart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(ForecastLogger.TAG, "MainActivity onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(ForecastLogger.TAG, "MainActivity onPause() ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(ForecastLogger.TAG, "MainActivity onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(ForecastLogger.TAG, "MainActivity onDestroy()");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(ForecastLogger.TAG, "MainActivity onSaveInstanceState()");
+        if (manager.findFragmentByTag(CurrentFragment.TAG)!=null){
+            outState.putString("MyFragment", CurrentFragment.TAG);
+        } else {
+            if (manager.findFragmentByTag(ForecastFragment.TAG)!=null) {
+                outState.putString("MyFragment", ForecastFragment.TAG);
+            }
+        }
     }
 }
