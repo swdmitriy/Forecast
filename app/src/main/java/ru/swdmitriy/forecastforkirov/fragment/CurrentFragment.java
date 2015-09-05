@@ -53,7 +53,7 @@ public class CurrentFragment extends Fragment {
         forecastRequest = new CurrentRetrofitSpiceRequest(POST_PARAMS);
         loadCurrentForecast();
         CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
-        getSpiceManager().execute(forecastRequest, "forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
+        getSpiceManager().execute(forecastRequest, "Current", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
 
     }
 

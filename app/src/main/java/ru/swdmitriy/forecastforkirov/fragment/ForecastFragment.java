@@ -67,7 +67,7 @@ public class ForecastFragment extends Fragment {
             }
         });
         forecastRequest = new WeatherDataXmlRequest(country, region, city);
-        getSpiceManager().execute( forecastRequest, new Integer( 0 ), DurationInMillis.ONE_MINUTE, new ForecastRequestListener() );
+        getSpiceManager().execute( forecastRequest, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener() );
     }
 
 
@@ -82,21 +82,9 @@ public class ForecastFragment extends Fragment {
 
         @Override
         public void onRequestSuccess( final WeatherData weatherData ) {
-            Toast.makeText( getActivity(), "success", Toast.LENGTH_SHORT ).show();
-            /*Log.d(ForecastLogger.TAG, weatherData.getSize());*/
-//            Log.d(ForecastLogger.TAG, weatherData.getTime().iterator().next().getFrom());
             ArrayList<Time> times = new ArrayList<Time>(weatherData.getTime());
             forecastAdapter = new ForecastAdapter(getActivity(), times);
             forecastListView.setAdapter(forecastAdapter);
-
-//            ArrayAdapter<WeatherData> adapter = new ArrayAdapter<WeatherData>(this,
-//                    android.R.layout.simple_list_item_1, names);
-
-            // присваиваем адаптер списку
-//            forecastListView.setAdapter(adapter);
-
-
-
         }
     }
 

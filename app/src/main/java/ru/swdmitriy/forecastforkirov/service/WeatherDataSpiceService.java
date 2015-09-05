@@ -9,6 +9,7 @@ import com.octo.android.robospice.persistence.exception.CacheCreationException;
 import com.octo.android.robospice.persistence.memory.LruCacheStringObjectPersister;
 import com.octo.android.robospice.persistence.ormlite.InDatabaseObjectPersisterFactory;
 import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
+import com.octo.android.robospice.persistence.springandroid.json.jackson2.Jackson2ObjectPersister;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -55,12 +56,7 @@ public class WeatherDataSpiceService extends SpringAndroidSpiceService {
     @Override
     public CacheManager createCacheManager(Application application) throws CacheCreationException {
         CacheManager cacheManager = new CacheManager();
-        List< Class< ? >> classCollection = new ArrayList< Class< ? >>();
-        classCollection.add(WeatherData.class);
-        classCollection.add(Time.class);
-        RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper( application, "forecast_database.db", 1 );
-        InDatabaseObjectPersisterFactory inDatabaseObjectPersisterFactory = new InDatabaseObjectPersisterFactory( application, databaseHelper, classCollection );
-        cacheManager.addPersister(inDatabaseObjectPersisterFactory);
+        cacheManager.addPersister(new com.octo.android.robospice.persistence.springandroid.xml.SimpleSerializerObjectPersisterFactory(application));
         return cacheManager;
     }
 }
