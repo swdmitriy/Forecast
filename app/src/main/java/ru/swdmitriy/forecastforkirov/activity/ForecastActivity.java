@@ -33,8 +33,8 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
         forecastFragment = new ForecastFragment();
         transaction = manager.beginTransaction();
         if (manager.findFragmentByTag(CurrentFragment.TAG)==null){
-
-                transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+            transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+            Log.d(ForecastLogger.TAG, "add CurrentFragment");
         }
         transaction.commit();
 
@@ -51,8 +51,10 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
                 if (manager.findFragmentByTag(CurrentFragment.TAG)==null){
                     if (manager.findFragmentByTag(ForecastFragment.TAG)!=null){
                         transaction.replace(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+                        Log.d(ForecastLogger.TAG, "replace with CurrentFragment");
                     } else{
                         transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
+                        Log.d(ForecastLogger.TAG, "add CurrentFragment");
                     }
 
                 }
@@ -62,8 +64,10 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
                 if (manager.findFragmentByTag(ForecastFragment.TAG) == null) {
                     if (manager.findFragmentByTag(CurrentFragment.TAG)!=null){
                         transaction.replace(R.id.forecast_container, forecastFragment, ForecastFragment.TAG);
+                        Log.d(ForecastLogger.TAG, "add with ForecastFragment");
                     } else{
                         transaction.add(R.id.forecast_container, forecastFragment, ForecastFragment.TAG);
+                        Log.d(ForecastLogger.TAG, "add ForecastFragment");
                     }
                 }
                 break;
