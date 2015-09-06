@@ -2,24 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="-"
-        android:id="@+id/tempView"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textSize="@dimen/tempText"
-        android:textColor="@color/main_text" />
 
-    <TextView
-        android:layout_width="wrap_content"
+
+
+
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view2"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=":"
-        android:id="@+id/timeStampView"
-        android:layout_gravity="center_horizontal"
-        android:gravity="top"
-        android:textSize="@dimen/timeStampText"
-        android:textColor="@color/main_text" />
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="0dp"
+        card_view:cardElevation="2dp"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/forecast_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_gravity="top"
+                android:src="@drawable/bg_land"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="-"
+                android:id="@+id/tempView"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="@dimen/tempText"
+                android:textColor="@color/main_text" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:id="@+id/timeStampView"
+                android:layout_gravity="center_horizontal"
+                android:gravity="top"
+                android:textSize="@dimen/timeStampText"
+            android:textColor="@color/main_text" />
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
 </LinearLayout>

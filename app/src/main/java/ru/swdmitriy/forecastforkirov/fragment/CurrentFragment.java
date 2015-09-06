@@ -120,8 +120,10 @@ public class CurrentFragment extends Fragment {
     }
 
     private void updateCurrentForecast(Forecast forecast) throws UnsupportedEncodingException {
-        tempView.setText(forecast.getTemperature().getValue() +" °C");
-        timeStampView.setText(new String(forecast.getTemperature().getTime().split(" ")[0].getBytes("UTF-8"), "UTF-8") + " " + forecast.getTemperature().getTime().split(" ")[1]);
+        if (forecast.getTemperature()!=null){
+            tempView.setText(forecast.getTemperature().getValue() +" °C");
+            timeStampView.setText(new String(forecast.getTemperature().getTime().split(" ")[0].getBytes("UTF-8"), "UTF-8") + " " + forecast.getTemperature().getTime().split(" ")[1]);
+        }
     }
 
     private void saveCurrentForecast(){
