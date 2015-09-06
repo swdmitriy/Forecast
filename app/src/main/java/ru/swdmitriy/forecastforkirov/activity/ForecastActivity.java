@@ -3,10 +3,12 @@ package ru.swdmitriy.forecastforkirov.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import ru.swdmitriy.forecastforkirov.R;
+import ru.swdmitriy.forecastforkirov.dbhelper.ForecastDbHelper;
 import ru.swdmitriy.forecastforkirov.fragment.CurrentFragment;
 import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment;
 import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment.ReturnEventListener;
@@ -21,6 +23,7 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
     private ForecastFragment forecastFragment;
     private FragmentManager manager;
     private FragmentTransaction transaction;
+    private ForecastDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
                 transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
             }
         transaction.commit();
+        dbHelper = new ForecastDbHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
     }
 
