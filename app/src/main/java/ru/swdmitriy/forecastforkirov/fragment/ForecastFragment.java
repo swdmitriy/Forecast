@@ -25,6 +25,7 @@ import ru.swdmitriy.forecastforkirov.model.Time;
 import ru.swdmitriy.forecastforkirov.model.WeatherData;
 import ru.swdmitriy.forecastforkirov.service.WeatherDataSpiceService;
 import ru.swdmitriy.forecastforkirov.service.WeatherDataXmlRequest;
+import ru.swdmitriy.forecastforkirov.util.Location;
 
 /**
  * Created by dmitriy on 25.08.15.
@@ -33,12 +34,6 @@ public class ForecastFragment extends Fragment {
     public static final String TAG = "ForecastFragmentTag";
     private SpiceManager spiceManager = new SpiceManager(WeatherDataSpiceService.class );
     private WeatherDataXmlRequest forecastRequest;
-    private static final String lat = "58.6034";
-    private static final String lon = "49.6672";
-
-    private static final String country = "Russland";
-    private static final String region = "Kirov";
-    private static final String city = "Kirov";
 
 
 
@@ -66,8 +61,9 @@ public class ForecastFragment extends Fragment {
                 returnEventListener.returnEvent();
             }
         });
-        forecastRequest = new WeatherDataXmlRequest(country, region, city);
-        getSpiceManager().execute( forecastRequest, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener() );
+        forecastRequest = new WeatherDataXmlRequest(Location.getCountry(), Location.getRegion(), Location.getCity());
+        getSpiceManager().getFromCache(WeatherData.class, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
+        getSpiceManager().execute(forecastRequest, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
     }
 
 
@@ -82,9 +78,11 @@ public class ForecastFragment extends Fragment {
 
         @Override
         public void onRequestSuccess( final WeatherData weatherData ) {
-            ArrayList<Time> times = new ArrayList<Time>(weatherData.getTime());
-            forecastAdapter = new ForecastAdapter(getActivity(), times);
-            forecastListView.setAdapter(forecastAdapter);
+            if (weatherData!=null) {
+                ArrayList<Time> times = new ArrayList<>(weatherData.getTime());
+                forecastAdapter = new ForecastAdapter(getActivity(), times);
+                forecastListView.setAdapter(forecastAdapter);
+            }
         }
     }
 

@@ -59,4 +59,6 @@ public class WeatherDataSpiceService extends SpringAndroidSpiceService {
         cacheManager.addPersister(new com.octo.android.robospice.persistence.springandroid.xml.SimpleSerializerObjectPersisterFactory(application));
         return cacheManager;
     }
+
+
 }

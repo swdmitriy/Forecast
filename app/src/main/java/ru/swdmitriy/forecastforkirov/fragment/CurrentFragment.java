@@ -25,6 +25,8 @@ import ru.swdmitriy.forecastforkirov.model.Forecast;
 import ru.swdmitriy.forecastforkirov.model.WeatherData;
 import ru.swdmitriy.forecastforkirov.service.CurrentRetrofitSpiceRequest;
 import ru.swdmitriy.forecastforkirov.service.CurrentService;
+import ru.swdmitriy.forecastforkirov.service.WeatherDataXmlRequest;
+import ru.swdmitriy.forecastforkirov.util.Location;
 
 /**
  * Created by dmitriy on 25.08.15.
@@ -54,6 +56,7 @@ public class CurrentFragment extends Fragment {
         loadCurrentForecast();
         CurrentFragment.this.getActivity().setProgressBarIndeterminateVisibility(true);
         getSpiceManager().execute(forecastRequest, "Current", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
+
 
     }
 
