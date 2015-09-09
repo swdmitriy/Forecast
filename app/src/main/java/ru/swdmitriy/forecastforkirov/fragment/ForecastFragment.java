@@ -61,7 +61,7 @@ public class ForecastFragment extends Fragment {
                 returnEventListener.returnEvent();
             }
         });
-        forecastRequest = new WeatherDataXmlRequest(Location.getCountry(), Location.getRegion(), Location.getCity());
+        forecastRequest = new WeatherDataXmlRequest(getActivity(), Location.getCountry(), Location.getRegion(), Location.getCity());
         getSpiceManager().getFromCache(WeatherData.class, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
         getSpiceManager().execute(forecastRequest, "Forecast", DurationInMillis.ONE_MINUTE, new ForecastRequestListener());
     }
@@ -79,7 +79,7 @@ public class ForecastFragment extends Fragment {
         @Override
         public void onRequestSuccess( final WeatherData weatherData ) {
             if (weatherData!=null) {
-                ArrayList<Time> times = new ArrayList<>(weatherData.getTime());
+                ArrayList<Time> times = new ArrayList<>(weatherData.getTimes());
                 forecastAdapter = new ForecastAdapter(getActivity(), times);
                 forecastListView.setAdapter(forecastAdapter);
             }

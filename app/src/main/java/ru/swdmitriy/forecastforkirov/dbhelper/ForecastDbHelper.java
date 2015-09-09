@@ -20,9 +20,10 @@ public class ForecastDbHelper extends SQLiteOpenHelper {
     public static final String TIME_TABLENAME = "time";
 
     public static final String WEATHERDATA_ID = "id";
+    public static final String WEATHERDATA_LASTUPDATE = "last_update";
     public static final String TIME_ID = "id";
-    public static final String TIME_FROM = "from";
-    public static final String TIME_TO = "to";
+    public static final String TIME_FROM = "time_from";
+    public static final String TIME_TO = "time_to";
     public static final String TIME_PRECIPITATION = "precipitation";
     public static final String TIME_TEMPERATURE = "temperature";
     public static final String TIME_PHENOMENON = "phenomenon";
@@ -38,7 +39,7 @@ public class ForecastDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(ForecastLogger.TAG, "Create db");
-        db.execSQL("CREATE TABLE " + WEATHERDATA_TABLENAME + "(" + WEATHERDATA_ID
+        db.execSQL("CREATE TABLE " + WEATHERDATA_TABLENAME + "(`" + WEATHERDATA_LASTUPDATE + "` VARCHAR , " + WEATHERDATA_ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT );");
         db.execSQL("CREATE TABLE " + TIME_TABLENAME +" (`" + TIME_FROM + "` VARCHAR , `"
                 +TIME_WEATHERDATAID+"` INTEGER , `"+TIME_TO+"` VARCHAR , `" + TIME_PRECIPITATION
