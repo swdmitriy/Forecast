@@ -40,7 +40,7 @@ public class WeatherDataXmlRequest extends SpringAndroidSpiceRequest<WeatherData
     }
 
     private void saveResult(WeatherData result){
-        ForecastDbHelper fdbh = new ForecastDbHelper(context);
+        ForecastDbHelper fdbh = ForecastDbHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = fdbh.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(fdbh.WEATHERDATA_LASTUPDATE, result.getLastupdate());

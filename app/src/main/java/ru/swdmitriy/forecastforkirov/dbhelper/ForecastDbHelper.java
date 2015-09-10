@@ -30,7 +30,15 @@ public class ForecastDbHelper extends SQLiteOpenHelper {
     public static final String TIME_WEATHERDATAID = "weather_id";
 
 
+    private static ForecastDbHelper instance = null;
 
+    public static synchronized ForecastDbHelper getInstance(Context context){
+        if (instance==null){
+            instance = new ForecastDbHelper(context.getApplicationContext());
+            return instance;
+        }
+        return instance;
+    }
 
     public ForecastDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -52,4 +60,6 @@ public class ForecastDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
 }
