@@ -1,4 +1,4 @@
-package ru.swdmitriy.forecastforkirov.dbhelper;
+package ru.swdmitriy.forecastforkirov.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

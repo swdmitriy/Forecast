@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_background">#20093C</color>
-    <color name="main_text">#20093C</color>
+    <color name="main_text">#000000</color>
+    <color name="city_main_text">#000000</color>
+    <color name="region_text">#696969</color>
 </resources>

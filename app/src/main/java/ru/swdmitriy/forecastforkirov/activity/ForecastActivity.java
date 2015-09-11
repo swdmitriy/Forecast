@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import ru.swdmitriy.forecastforkirov.R;
-import ru.swdmitriy.forecastforkirov.dbhelper.ForecastDbHelper;
+import ru.swdmitriy.forecastforkirov.db.ForecastDbHelper;
 import ru.swdmitriy.forecastforkirov.fragment.CurrentFragment;
 import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment;
 import ru.swdmitriy.forecastforkirov.fragment.ForecastFragment.ReturnEventListener;
@@ -40,9 +40,6 @@ public class ForecastActivity extends Activity implements ReturnEventListener{
                 transaction.add(R.id.forecast_container, currentFragment, CurrentFragment.TAG);
             }
         transaction.commit();
-        dbHelper = new ForecastDbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
     }
 
 

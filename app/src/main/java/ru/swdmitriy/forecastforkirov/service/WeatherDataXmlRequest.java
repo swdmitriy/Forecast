@@ -9,10 +9,9 @@ import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceReques
 
 import org.springframework.web.client.RestClientException;
 
-import java.sql.SQLData;
 import java.util.Collection;
 
-import ru.swdmitriy.forecastforkirov.dbhelper.ForecastDbHelper;
+import ru.swdmitriy.forecastforkirov.db.ForecastDbHelper;
 import ru.swdmitriy.forecastforkirov.logger.ForecastLogger;
 import ru.swdmitriy.forecastforkirov.model.Time;
 import ru.swdmitriy.forecastforkirov.model.WeatherData;
